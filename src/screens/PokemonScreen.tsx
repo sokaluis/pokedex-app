@@ -1,8 +1,20 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../navigator/StackNavigator';
+// import { FadeInImage } from '../components/FadeImage';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeInImage } from '../components/FadeImage';
+import { usePokemon } from '../hooks/usePokemon';
 
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> {}
 
@@ -10,12 +22,74 @@ export const PokemonScreen = ({
   route: {
     params: { color, pokemon },
   },
+  navigation,
 }: Props) => {
-  const { name, url } = pokemon;
+  const { height } = useWindowDimensions();
+  const { top } = useSafeAreaInsets();
+  const { name, id, url } = pokemon;
+  const { pokemon: pokemonInfo } = usePokemon({ id });
+  const { stats } = pokemonInfo;
   return (
-    <View style={{ backgroundColor: color, flex: 1 }}>
-      <Text>{name}</Text>
-      <FadeInImage uri={url} style={{ width: 100, height: 100 }} />
+    <View style={{ flex: 1 }}>
+      <View
+        style={{
+          ...styles.headerContainer,
+          backgroundColor: color,
+          height: height * 0.45,
+        }}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={{ ...styles.backButton, top: top + 5 }}
+          onPress={() => navigation.goBack()}>
+          <Icon name="arrow-back-outline" color="white" size={35} />
+        </TouchableOpacity>
+        <Text style={{ ...styles.pokemonName, top: top + 40 }}>{name}</Text>
+        <Text style={{ ...styles.pokemonName, top: top + 40 }}>#{id}</Text>
+        <Image
+          source={require('../assets/pokebola-blanca.png')}
+          style={{ ...styles.pokeball, bottom: height * 0.015 }}
+        />
+        <FadeInImage uri={url} style={{ ...styles.pokemonImage }} />
+      </View>
+      <View style={{ ...styles.loading }}>
+        <ActivityIndicator color={color} size={50} />
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    zIndex: 999,
+    alignItems: 'center',
+    borderBottomLeftRadius: 1000,
+    borderBottomRightRadius: 1000,
+  },
+  backButton: {
+    position: 'absolute',
+    left: 20,
+  },
+  pokemonName: {
+    textTransform: 'capitalize',
+    color: 'white',
+    fontSize: 40,
+    alignSelf: 'flex-start',
+    left: 20,
+  },
+  pokeball: {
+    width: 250,
+    height: 250,
+    opacity: 0.7,
+  },
+  pokemonImage: {
+    width: 250,
+    height: 250,
+    position: 'absolute',
+    bottom: -15,
+  },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

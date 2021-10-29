@@ -1,52 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { PokemonFull } from '../interfaces/pokemon';
 import { pokemonApi } from '../api/pokeApi';
-import {
-  PokemonPaginatedResponse,
-  SimplePokemon,
-  Pokemon,
-} from '../interfaces/pokemon';
 
-export const usePokemon = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [simplePokemonList, setSimplePokemonList] = useState<SimplePokemon[]>(
-    [],
-  );
-  const nexPageUrl = useRef('https://pokeapi.co/api/v2/pokemon/?limit=40');
+interface Props {
+  id: string;
+}
 
-  const loadPokemons = async () => {
-    setIsLoading(true);
-    const resp = await pokemonApi.get<PokemonPaginatedResponse>(
-      nexPageUrl.current,
+export const usePokemon = ({ id }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [pokemon, setPokemon] = useState<PokemonFull>({} as PokemonFull);
+
+  const loadPokemon = async () => {
+    const resp = await pokemonApi.get<PokemonFull>(
+      `https://pokeapi.co/api/v2/pokemon/${id}/`,
     );
-    nexPageUrl.current = resp.data.next;
-    mapPokemonList(resp.data.results);
-  };
 
-  const mapPokemonList = (pokemonList: Pokemon[]) => {
-    const newPokemonList: SimplePokemon[] = pokemonList.map(({ name, url }) => {
-      const urlParts = url.split('/');
-      const id = urlParts[urlParts.length - 2];
-      const picture = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-
-      return {
-        id,
-        url: picture,
-        name,
-      };
-    });
-
-    setSimplePokemonList([...simplePokemonList, ...newPokemonList]);
+    setPokemon(resp.data);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    loadPokemons();
+    loadPokemon();
   }, []);
 
   return {
-    simplePokemonList,
     isLoading,
-    loadPokemons,
+    pokemon,
   };
 };

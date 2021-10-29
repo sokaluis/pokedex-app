@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef } from 'react';
 import { Animated, Easing } from 'react-native';
-import { usePokemon } from '../hooks/usePokemon';
+import { usePokemonList } from '../hooks/usePokemonList';
 import { globalStyles } from '../theme/appTheme';
 import { ThemeContext } from '../context/themeContext';
 
 export const PokeReload = () => {
-  const { isLoading } = usePokemon();
+  const { isLoading } = usePokemonList();
   const { theme } = useContext(ThemeContext);
   const initialRage = useRef(new Animated.Value(0)).current;
   const animTime = useRef(5000).current;

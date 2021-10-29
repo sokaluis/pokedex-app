@@ -8,13 +8,13 @@ import {
 } from 'react-native';
 import { globalStyles } from '../theme/appTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { usePokemon } from '../hooks/usePokemon';
+import { usePokemonList } from '../hooks/usePokemonList';
 import { PokeReload } from '../components/PokeReload';
 import { ThemeContext } from '../context/themeContext';
 import { PokemonCard } from '../components/PokemonCard';
 
 export const HomeScreen = () => {
-  const { simplePokemonList, loadPokemons } = usePokemon();
+  const { simplePokemonList, loadPokemons } = usePokemonList();
   const {
     theme: { dividerColor, colors },
   } = useContext(ThemeContext);
