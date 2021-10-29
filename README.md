@@ -6,7 +6,7 @@ A Pokedex App Based in the PokeAPI project
 - [ ] Found a better name for the App LOL
 - [ ] Changes App Icons and Add Splashview
 - [ ] Start procesing to upload the App to App Store (Test Flight minimun) and Play Store
-- [ ]
+- [ ] Create a Github Project for this repo and start using Issues and basic Kanban
 - [ ]
 - [ ]
 
