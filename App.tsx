@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import 'react-native-gesture-handler';
-import { ThemeProvider, ThemeContext } from './src/context/themeContext';
-import { NavigationContainer } from '@react-navigation/native';
+import { ThemeProvider } from './src/context/themeContext';
 import StackNavigator from './src/navigator/StackNavigator';
 
 interface AppStateProps {
@@ -13,12 +12,9 @@ const AppState = ({ children }: AppStateProps) => (
 );
 
 const App = () => {
-  const { theme } = useContext(ThemeContext);
   return (
     <AppState>
-      <NavigationContainer theme={theme}>
-        <StackNavigator />
-      </NavigationContainer>
+      <StackNavigator />
     </AppState>
   );
 };
