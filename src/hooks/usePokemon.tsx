@@ -37,9 +37,7 @@ export const usePokemon = () => {
     });
 
     setSimplePokemonList([...simplePokemonList, ...newPokemonList]);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -49,5 +47,6 @@ export const usePokemon = () => {
   return {
     simplePokemonList,
     isLoading,
+    loadPokemons,
   };
 };

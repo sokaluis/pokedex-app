@@ -9,10 +9,11 @@ export const PokeReload = () => {
   const { isLoading } = usePokemon();
   const { theme } = useContext(ThemeContext);
   const initialRage = useRef(new Animated.Value(0)).current;
+  const animTime = useRef(5000).current;
   const animation = useRef(
     Animated.timing(initialRage, {
       toValue: 1,
-      duration: 10000,
+      duration: animTime,
       easing: Easing.linear,
       useNativeDriver: true,
     }),
@@ -22,10 +23,12 @@ export const PokeReload = () => {
     if (isLoading) {
       animation.start();
     } else {
-      animation.stop();
-      initialRage.setValue(0);
+      setTimeout(() => {
+        animation.stop();
+        initialRage.setValue(0);
+      }, animTime);
     }
-    return () => animation.stop();
+    // return () => animation.stop();
   }, [isLoading, animation]);
 
   const spin = initialRage.interpolate({
