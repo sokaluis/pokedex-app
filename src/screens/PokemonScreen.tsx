@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParams } from '../navigator/Tab2Screen';
+import { RootStackParams } from '../navigator/Tab1Screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeInImage } from '../components/FadeImage';
