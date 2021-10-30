@@ -23,9 +23,11 @@ export const PokemonDetails = ({ pokemon }: Props) => {
         <Text style={{ ...styles.title }}>Types</Text>
         <View style={styles.regularTextContainer}>
           {!!pokemon.types &&
-            pokemon.types.map(({ type }) => (
-              <Text key={type.name} style={{ ...styles.regularText }}>
-                {type.name}
+            pokemon.types.map((item, index) => (
+              <Text
+                key={item.type.name + index}
+                style={{ ...styles.regularText }}>
+                {item.type.name}
               </Text>
             ))}
         </View>
@@ -60,15 +62,41 @@ export const PokemonDetails = ({ pokemon }: Props) => {
               style={styles.basicSprite}
             />
           )}
+          {!!pokemon.sprites && (
+            <FadeInImage
+              uri={pokemon.sprites.front_female}
+              style={styles.basicSprite}
+            />
+          )}
+          {!!pokemon.sprites && (
+            <FadeInImage
+              uri={pokemon.sprites.back_female}
+              style={styles.basicSprite}
+            />
+          )}
+          {!!pokemon.sprites && (
+            <FadeInImage
+              uri={pokemon.sprites.front_shiny_female}
+              style={styles.basicSprite}
+            />
+          )}
+          {!!pokemon.sprites && (
+            <FadeInImage
+              uri={pokemon.sprites.back_shiny_female}
+              style={styles.basicSprite}
+            />
+          )}
         </ScrollView>
       </View>
       <View style={styles.container}>
         <Text style={{ ...styles.title }}>Abilities</Text>
         <View style={styles.regularTextContainer}>
           {!!pokemon.abilities &&
-            pokemon.abilities.map(({ ability }) => (
-              <Text key={ability.name} style={{ ...styles.regularText }}>
-                {ability.name}
+            pokemon.abilities.map((item, index) => (
+              <Text
+                key={item.ability.name + index}
+                style={{ ...styles.regularText }}>
+                {item.ability.name}
               </Text>
             ))}
         </View>
@@ -78,9 +106,11 @@ export const PokemonDetails = ({ pokemon }: Props) => {
         <View
           style={{ ...styles.regularTextContainer, ...styles.regularMoves }}>
           {!!pokemon.moves &&
-            pokemon.moves.map(({ move }) => (
-              <Text key={move.name} style={{ ...styles.regularText }}>
-                {move.name}
+            pokemon.moves.map((item, index) => (
+              <Text
+                key={item.move.name + index}
+                style={{ ...styles.regularText }}>
+                {item.move.name}
               </Text>
             ))}
         </View>
@@ -95,12 +125,9 @@ export const PokemonDetails = ({ pokemon }: Props) => {
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
-                }}>
-                <Text
-                  key={item.stat.name + index}
-                  style={{ ...styles.regularText }}>
-                  {item.stat.name}
-                </Text>
+                }}
+                key={item.stat.name + index}>
+                <Text style={{ ...styles.regularText }}>{item.stat.name}</Text>
                 <Text
                   key={item.base_stat + index}
                   style={{ ...styles.regularText }}>
