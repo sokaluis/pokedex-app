@@ -22,6 +22,7 @@ export const usePokemon = ({ id }: Props) => {
 
   useEffect(() => {
     loadPokemon();
+    return () => setIsLoading(false);
   }, []);
 
   return {

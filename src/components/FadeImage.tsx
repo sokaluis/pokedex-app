@@ -12,7 +12,7 @@ import {
 import { useAnimation } from '../hooks/useAnimation';
 
 interface Props {
-  uri: string;
+  uri: any;
   style?: StyleProp<ImageStyle>;
 }
 
