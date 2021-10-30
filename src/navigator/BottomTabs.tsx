@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ThemeContext } from '../context/themeContext';
-import StackNavigator from './StackNavigator';
-import { SearchScreen } from '../screens/SearchScreen';
+import { Tab1Screen } from './Tab1Screen';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Tab2Screen } from './Tab2Screen';
 
 export type RootTabParams = {
   Pokedex: undefined;
@@ -42,7 +42,7 @@ export const BottomTabNavigator = () => {
             <Icon name="list-outline" size={25} color={color} />
           ),
         }}
-        component={StackNavigator}
+        component={Tab1Screen}
       />
       <Tab.Screen
         name="SearchScreen"
@@ -52,7 +52,7 @@ export const BottomTabNavigator = () => {
             <Icon name="search-outline" size={25} color={color} />
           ),
         }}
-        component={SearchScreen}
+        component={Tab2Screen}
       />
     </Tab.Navigator>
   );

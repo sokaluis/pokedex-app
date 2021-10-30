@@ -13,7 +13,7 @@ export type RootStackParams = {
 
 const Stack = createStackNavigator<RootStackParams>();
 
-const StackNavigator = () => {
+export const Tab1Screen = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <Stack.Navigator
@@ -28,5 +28,3 @@ const StackNavigator = () => {
     </Stack.Navigator>
   );
 };
-
-export default StackNavigator;
