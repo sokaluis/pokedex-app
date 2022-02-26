@@ -16,7 +16,6 @@ const App = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <AppState>
-      {''}
       <NavigationContainer theme={theme}>
         <BottomTabNavigator />
       </NavigationContainer>
